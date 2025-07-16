@@ -25,7 +25,7 @@ Desenvolver uma aplicação web simples para gerenciar uma central de cursos onl
 
 #Funcionalidades do sistema:
 - Cadastro de cursos por professsores (máximo de 2 cursos por professor)
-- Listagem pública de todos os cursos cadastrados:
+- Listagem pública de todos os cursos cadastrados e divididos por área (Desenvolvimento Pessoal e Profissional; IA; Negócios e Inovação; Produtividade; Programação)
 - Inscrição de alunos em cursos (máximo de 3 cursos por aluno)
 - Validações e restrições de regras de negócio
 - Integração com banco de dados MySQL para persistência dos dados
