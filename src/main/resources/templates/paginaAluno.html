@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="pt-BR">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body class="bg-light">
+        <div class="container mt-5">
+            <h2 class="text-center text-primary mb-4">CONFIRA NOSSOS CURSOS</h2>
+            
+            <div class="row mb-3 border rounded shadow-sm p-3 align-items-center bg-white">
+                <div class="col-md-8">
+                    <h5 class="mb-1">Nome do curso</h5>
+                    <a href="#" onclick="mostrarDetalhes()" class="text-decoration-none text-primary">Detalhes</a>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-primary" onclick="abrirInscricao()">Inscreva-se</button>
+                </div>
+            </div>
+            
+            <div id="detalhesCurso" class="alert alert-info d-none">
+                <h5>Descrição</h5>
+                <p>Este curso aborda os conceitos fundamentais de programação...</p>
+                <p><strong>Área:</strong> Programação</p>
+                <p><strong>Duração:</strong> 40 horas</p>
+                <hr>
+                <h5>Professor responsável</h5>
+                <p><strong>Nome:</strong> João da Silva</p>
+                <p><strong>Email:</strong> joao@email.com</p>
+                <p><strong>Formação:</strong> Bacharel em Sistemas de Informação - UFMG</p>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="modalInscricao" tabindex="-1">
+            <div class="modal-dialog">
+                <form class="modal-content needs-validation" novalidate onsubmit="salvarInscricao(event)">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Inscreva-se no Curso</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nomeAluno" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nomeAluno" required placeholder="Digite seu nome completo">
+                            <div class="invalid-feedback">Informe seu nome completo.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cpfAluno" class="form-label">CPF:</label>
+                            <input type="text" class="form-control" id="cpfAluno" required placeholder="XXX.XXX.XXX-XX" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                            <div class="invalid-feedback">Digite um CPF válido (formato XXX.XXX.XXX-XX)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailAluno" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="emailAluno" required placeholder="exemplo@email.com">
+                            <div class="invalid-feedback">Digite um e-mail válido</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefoneAluno" class="form-label">Telefone:</label>
+                            <input type="text" class="form-control" id="telefoneAluno" required placeholder="(XX) XXXXX-XXXX">
+                            <div class="invalid-feedback">Digite um telefone válido.</div>
+                        </div>
+                    </div>
+                     <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                     </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div id="alertFeedback" class="toast align-items-center text-white bg-success border-0 d-none" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body" id="mensagemFeedback">
+                        Cadastro realizado com sucesso!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" onclick="ocultarFeedback()"></button>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
