@@ -1,8 +1,40 @@
-function mostrarDetalhes() {
-    document.getElementById("detalhesCurso").classList.remove("d-none");
+$(document).ready(function () {
+    listarCursos();
+
+    $('#formInscricao').on('submit', salvarInscricao);
+});
+
+function listarCursos() {
+    $.get(`${API_BASE}/cursos`, function (cursos) {
+        const container = $('#listaCursos');
+        container.empty();
+
+        cursos.forEach(curso => {
+            const card = `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5>${curso.nome}</h5>
+                        <button class="btn btn-info btn-sm me-2" onclick='mostrarDetalhes(${JSON.stringify(curso)})'>Detalhes</button>
+                        <button class="btn btn-primary btn-sm" onclick='abrirInscricao(${curso.id})'>Inscrever-se</button>
+                    </div>
+                </div>`;
+            container.append(card);
+        });
+    });
 }
 
-function abrirInscricao() {
+function mostrarDetalhes(curso) {
+    $('#detalhesCurso').removeClass('d-none');
+    $('#descricaoDetalhe').text(curso.descricao);
+    $('#areaDetalhe').text(curso.area);
+    $('#duracaoDetalhe').text(`${curso.duracao} horas`);
+    $('#professorDetalhe').html(`Professor: ${curso.professor.nome} (${curso.professor.email})`);
+}
+
+let cursoSelecionado = null;
+
+function abrirInscricao(idCurso) {
+    cursoSelecionado = idCurso;
     const modal = new bootstrap.Modal(document.getElementById("modalInscricao"));
     modal.show();
 }
@@ -10,36 +42,34 @@ function abrirInscricao() {
 function salvarInscricao(event) {
     event.preventDefault();
 
-    const form = event.target;
-    if (!form.checkValidity()) {
-        form.classList.add("was-validated");
-        return;
-    }
+    const aluno = {
+        nome: $('#nomeAluno').val(),
+        cpf: $('#cpfAluno').val(),
+        email: $('#emailAluno').val(),
+        telefone: $('#telefoneAluno').val(),
+    };
 
-    // Simular sucesso
-    const modal = bootstrap.Modal.getInstance(document.getElementById("modalInscricao"));
-    modal.hide();
-
-    form.reset();
-    form.classList.remove("was-validated");
-
-    mostrarFeedback("Inscrição realizada com sucesso!", true);
+    $.ajax({
+        url: `${API_BASE}/alunos/${cursoSelecionado}`,
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(aluno),
+        success: function () {
+            $('#modalInscricao').modal('hide');
+            mostrarFeedback('Inscrição realizada com sucesso!', true);
+            $('#formInscricao')[0].reset();
+        },
+        error: function (xhr) {
+            mostrarFeedback(xhr.responseText || 'Erro ao se inscrever.', false);
+        }
+    });
 }
 
 function mostrarFeedback(mensagem, sucesso = true) {
-    const alerta = document.getElementById("alertaFeedback");
-    const mensagemBox = document.getElementById("mensagemFeedback");
-
-    alerta.classList.remove("bg-success", "bg-danger", "d-none");
-    alerta.classList.add(sucesso ? "bg-success" : "bg-danger");
-    mensagemBox.textContent = mensagem;
-
-    alerta.classList.add("show");
-}
-
-function ocultarFeedback() {
-    const alerta = document.getElementById("alertaFeedback");
-    alerta.classList.remove("show");
+    const alerta = $('#alertaFeedback');
+    alerta.removeClass('d-none bg-success bg-danger');
+    alerta.addClass(sucesso ? 'bg-success' : 'bg-danger');
+    $('#mensagemFeedback').text(mensagem);
 }
 
 
