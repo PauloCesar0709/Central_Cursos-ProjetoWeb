@@ -1,51 +1,27 @@
-$(document).ready(function () {
-    $('#formCurso').on('submit', cadastrarCurso);
-});
-
-function cadastrarCurso(event) {
-    event.preventDefault();
-
-    const professor = {
-        nome: $('#nomeProfessor').val(),
-        cpf: $('#cpfProfessor').val(),
-        email: $('#emailProfessor').val(),
-        formacoes: []
-    };
-
-    $('#listaFormacoes li').each(function () {
-        const partes = $(this).text().split(' - ');
-        professor.formacoes.push({ curso: partes[0], instituicao: partes[1] });
-    });
-
-    const curso = {
-        nome: $('#nomeCurso').val(),
-        descricao: $('#descricaoCurso').val(),
-        area: $('#areaCurso').val(),
-        duracao: $('#duracaoCurso').val(),
-        professor: professor
-    };
-
-    $.ajax({
-        url: `${API_BASE}/cursos`,
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(curso),
-        success: function () {
-            mostrarFeedback("Curso cadastrado com sucesso!", true);
-            $('#formCurso')[0].reset();
-            $('#listaFormacoes').empty();
-        },
-        error: function (xhr) {
-            mostrarFeedback(xhr.responseText || "Erro ao cadastrar curso.", false);
-        }
-    });
+function abrirFormacao() {
+    const modal = new bootstrap.Modal(document.getElementById('modalFormacao'));
+    modal.show();
 }
 
-function mostrarFeedback(mensagem, sucesso = true) {
-    const alerta = $('#alertaFeedback');
-    alerta.removeClass('d-none bg-success bg-danger');
-    alerta.addClass(sucesso ? 'bg-success' : 'bg-danger');
-    $('#mensagemFeedback').text(mensagem);
+function salvarFormacao(event) {
+    event.preventDefault();
+
+    const curso = document.getElementById('cursoFormacao').value;
+    const instituicao = document.getElementById('instituicaoFormacao').value;
+
+    if (curso && instituicao) {
+        const lista = document.getElementById('listaFormacoes');
+        const item = document.createElement('li');
+        item.className = 'list-group-item';
+        item.textContent = `${curso} - ${instituicao}`;
+        lista.appendChild(item);
+
+        // Resetar campos e fechar modal
+        document.getElementById('cursoFormacao').value = '';
+        document.getElementById('instituicaoFormacao').value = '';
+        const modal = bootstrap.Modal.getInstance(document.getElementById('modalFormacao'));
+        modal.hide();
+    }
 }
 
 
