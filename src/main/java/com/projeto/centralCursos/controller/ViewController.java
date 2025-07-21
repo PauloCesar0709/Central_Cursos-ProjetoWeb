@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ViewController {
-    
     @GetMapping("/")
     public String index() {
         return "index";
@@ -21,5 +20,5 @@ public class ViewController {
     public String professor() {
         return "professor";
     }
-
+    
 }

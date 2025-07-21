@@ -1,22 +1,21 @@
-
 package com.projeto.centralCursos.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Inscricao {
-    @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "aluno_id")
+    @JsonIgnore
     private Aluno aluno;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "curso_id")
     private Curso curso;
-
 }

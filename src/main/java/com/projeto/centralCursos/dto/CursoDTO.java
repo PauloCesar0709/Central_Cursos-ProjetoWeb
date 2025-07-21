@@ -1,4 +1,5 @@
 
+
 package com.projeto.centralCursos.dto;
 
 import lombok.Data;
@@ -14,5 +15,6 @@ public class CursoDTO {
     private String cpfProfessor;
     private String emailProfessor;
     private List<FormacaoDTO> formacoes;
+
 
 }

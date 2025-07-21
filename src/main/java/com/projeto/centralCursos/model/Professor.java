@@ -1,6 +1,5 @@
 
 package com.projeto.centralCursos.model;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,5 +21,4 @@ public class Professor {
 
     @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
     private List<Formacao> formacoes = new ArrayList<>();
-
 }

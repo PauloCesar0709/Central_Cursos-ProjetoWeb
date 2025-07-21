@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    
     // Adicionar aria-labels aos botões principais
     $('a.btn-primary').attr('aria-label', 'Acessar área do professor');
     $('a.btn-success').attr('aria-label', 'Acessar área do aluno');

@@ -87,3 +87,5 @@ $(document).ready(function() {
 function removeFormacao(id) {
     $(`#formacao-${id}`).remove();
 }
+
+

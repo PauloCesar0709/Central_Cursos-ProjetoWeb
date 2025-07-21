@@ -1,6 +1,6 @@
 
-package com.projeto.centralCursos.model;
 
+package com.projeto.centralCursos.model;
 import jakarta.persistence.*;
 import lombok.*;
 
