@@ -1,0 +1,91 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.welcome-card {
+    background-color: white;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4 {
+    color: #2c3e50;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.btn-success {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+    border-color: #27ae60;
+}
+
+.curso-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.curso-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.area-badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+/* Acessibilidade */
+:focus {
+    outline: 3px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Máscaras e validação */
+.is-invalid {
+    border-color: #e74c3c;
+}
+
+.invalid-feedback {
+    color: #e74c3c;
+}
+
+/* Formações */
+.formacao-item {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .welcome-card {
+        padding: 20px;
+    }
+}
+
+.focus-highlight {
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
+    position: relative;
+    z-index: 1;
+}
